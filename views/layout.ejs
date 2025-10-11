@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title><%= typeof title !== 'undefined' ? title : 'Sxtream Code' %></title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="/styles.css">
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+    .glass-effect { background: rgba(30, 41, 59, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(148, 163, 184, 0.1); }
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #1e293b; border-radius: 3px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #10b981; border-radius: 3px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #059669; }
+  </style>
+</head>
+<body class="text-white min-h-screen">
+
+  <header class="bg-slate-900/70 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-700/50">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 bg-gradient-to-r from-emerald-400 to-blue-400 rounded-lg flex items-center justify-center">
+          <i class="fas fa-code text-sm text-white"></i>
+        </div>
+        <h1 class="text-xl font-bold text-white">Sxtream Code</h1>
+      </div>
+      <div class="flex items-center gap-4">
+        <% if (username) { %>
+          <div class="text-gray-300 hidden sm:flex items-center gap-2">
+            <span>Selamat datang.!, <%= username %></span>
+         
+          </div>
+          <a href="/create" class="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition shadow-lg hover:shadow-emerald-500/25 text-sm font-semibold">
+            <i class="fas fa-plus"></i>
+            Buat Code
+          </a>
+        <% } %>
+      </div>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 py-8">
+    <%- body %>
+  </main>
+
+  <script>
+    if (window.hljs) { window.hljs.highlightAll(); }
+  </script>
+  <script src="/js/main.js"></script>
+</body>
+</html>
