@@ -1,0 +1,21 @@
+<% layout('layout') -%>
+<section class="min-h-[70vh] flex items-center justify-center p-4">
+  <div class="max-w-md w-full">
+    <form action="/set-username" method="POST" class="glass-effect border border-gray-600/30 rounded-xl p-8 space-y-6 text-center">
+      <div class="w-16 h-16 bg-gradient-to-r from-emerald-400 to-blue-400 rounded-lg flex items-center justify-center mx-auto">
+        <i class="fas fa-code text-2xl text-white"></i>
+      </div>
+      <h1 class="text-2xl font-bold text-white">Welcome to Sxtream Code</h1>
+      <p class="text-gray-300">Buat nama pengguna Anda untuk melanjutkan. Ini disimpan dalam cookie browser Anda..</p>
+      <div>
+        <label for="username" class="sr-only">Username</label>
+        <input type="text" id="username" name="username" required minlength="3"
+          class="w-full glass-effect border border-gray-600/50 rounded-lg px-4 py-3 focus:outline-none focus:border-emerald-400 transition text-center"
+          placeholder="Buat username" />
+      </div>
+      <button type="submit" class="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white px-5 py-3 rounded-lg flex items-center justify-center gap-2 transition shadow-lg hover:shadow-emerald-500/25 font-semibold">
+        Lanjutkan dan simpan
+      </button>
+    </form>
+  </div>
+</section>
