@@ -1,0 +1,68 @@
+<% layout('layout') -%>
+<section class="space-y-6">
+  <div class="flex justify-between items-center">
+    <a href="/" class="flex items-center gap-2 text-gray-300 hover:text-white transition">
+      <i class="fas fa-chevron-left"></i>
+      Kembali
+    </a>
+    <div class="flex items-center gap-3">
+      <button id="view-raw" class="bg-gray-700/50 hover:bg-gray-600/50 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition text-sm font-semibold">
+        <i class="fas fa-file-alt"></i> View Raw
+      </button>
+      <button id="share-btn" class="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition shadow-lg hover:shadow-purple-500/25 text-sm font-semibold">
+        <i class="fas fa-share"></i> Share
+      </button>
+    </div>
+  </div>
+
+  <div class="glass-effect border border-gray-600/30 rounded-xl p-6 space-y-4">
+    <div class="flex justify-between items-start">
+      <div>
+        <h2 class="text-2xl font-bold text-white"><%= snippet.title %></h2>
+        <p class="text-gray-400"><%= snippet.description || 'Tidak ada deskripsi yang diberikan.' %></p>
+      </div>
+      <span class="bg-gray-700/50 text-emerald-400 text-sm font-mono font-semibold px-3 py-1.5 rounded-full whitespace-nowrap"><%= language %></span>
+    </div>
+    <div class="text-sm text-gray-500">
+      <span>By <span class="font-semibold text-gray-400"><%= snippet.createdBy?.username || 'anon' %></span> on <%= new Date(snippet.createdAt).toLocaleDateString() %></span>
+    </div>
+  </div>
+
+  <div class="relative glass-effect border border-gray-600/30 rounded-xl">
+    <div class="absolute top-4 right-4 flex gap-2">
+      <button id="copy-code" class="text-gray-400 bg-slate-800/50 backdrop-blur-sm w-8 h-8 rounded-md flex items-center justify-center hover:text-white transition" title="Copy code">
+        <i class="fas fa-copy"></i>
+      </button>
+    </div>
+    <pre class="p-6 rounded-lg overflow-x-auto custom-scrollbar">
+      <code id="code-block" class="language-<%= language %>"><%- snippet.code %></code>
+    </pre>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const codeEl = document.getElementById("code-block")
+      if (window.hljs && codeEl) window.hljs.highlightElement(codeEl)
+
+      const copyBtn = document.getElementById("copy-code")
+      copyBtn?.addEventListener("click", () => {
+        navigator.clipboard.writeText(codeEl.innerText)
+        alert("Kode disalin ke papan klip!")
+      })
+
+      const rawBtn = document.getElementById("view-raw")
+      rawBtn?.addEventListener("click", () => {
+        const blob = new Blob([codeEl.innerText], { type: "text/plain" })
+        const url = URL.createObjectURL(blob)
+        window.open(url, "_blank")
+        setTimeout(() => URL.revokeObjectURL(url), 0)
+      })
+
+      const shareBtn = document.getElementById("share-btn")
+      shareBtn?.addEventListener("click", () => {
+        navigator.clipboard.writeText(window.location.href)
+        alert("link berhasil di salin..!")
+      })
+    })
+  </script>
+</section>
